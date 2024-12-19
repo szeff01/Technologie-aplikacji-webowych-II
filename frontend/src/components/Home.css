@@ -1,0 +1,31 @@
+/* Home.css */
+
+.home-container {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card .card-title {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.product-card .btn-primary {
+    margin-top: auto;
+}
+
+.home-container h1 {
+    color: #28a745;
+    margin-bottom: 2rem;
+}

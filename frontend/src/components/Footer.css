@@ -1,0 +1,26 @@
+/* Footer.css */
+
+.footer-container {
+    background-color: #f8f9fa; /* Jasnoszare tło */
+    color: #333; /* Kolor tekstu */
+    text-align: center;
+    padding: 5px 0;
+    position: absolute; /* Stopka na dole */
+    bottom: 0; /* Przyklejenie do dołu */
+    left: 0;
+    right: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Cień dla estetyki */
+    font-size: 0.9rem;
+}
+
+.footer-links a {
+    color: #007bff; /* Kolor linku */
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+    color: #0056b3; /* Zmiana koloru po najechaniu */
+}
