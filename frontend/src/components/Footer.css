@@ -1,17 +1,30 @@
-/* Footer.css */
+/* Główna strona z flexbox */
+body, html {
+    height: 100%; /* Pełna wysokość strony */
+    margin: 0; /* Usunięcie domyślnego marginesu */
+}
 
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Minimum 100% wysokości widoku */
+}
+
+.content-wrap {
+    flex: 1; /* Wypełnia pozostałą przestrzeń */
+    padding-bottom: 60px; /* Miejsce na stopkę */
+}
+
+/* Stopka */
 .footer-container {
     background-color: #f8f9fa; /* Jasnoszare tło */
     color: #333; /* Kolor tekstu */
     text-align: center;
-    padding: 5px 0;
-    position: absolute; /* Stopka na dole */
-    bottom: 0; /* Przyklejenie do dołu */
-    left: 0;
-    right: 0;
+    padding: 10px 0;
     width: 100%;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Cień dla estetyki */
     font-size: 0.9rem;
+    margin-top: auto; /* Przyklejenie stopki do dołu */
 }
 
 .footer-links a {
