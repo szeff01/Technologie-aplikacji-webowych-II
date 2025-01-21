@@ -15,11 +15,40 @@ const Cart = () => {
     setTotal(totalPrice);
   }, []);
 
+  // Funkcja zmieniająca ilość produktu w koszyku
+  const updateQuantity = (index, newQuantity) => {
+    if (newQuantity < 1) return; // Zapobiega ustawieniu ilości mniejszej niż 1
+
+    const updatedCart = [...cart];
+    updatedCart[index].quantity = newQuantity;
+
+    // Zapisanie zmienionego koszyka do localStorage
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    // Aktualizacja sumy
+    const updatedTotal = updatedCart.reduce(
+      (sum, product) => sum + product.price * product.quantity,
+      0
+    );
+    setTotal(updatedTotal);
+  };
+
   const clearCart = () => {
     localStorage.removeItem('cart');
     setCart([]);
     setTotal(0);
     alert('Koszyk został wyczyszczony!');
+  };
+
+  const removeItem = (indexToRemove) => {
+    const updatedCart = cart.filter((_, index) => index !== indexToRemove);
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    // Aktualizacja sumy
+    const updatedTotal = updatedCart.reduce((sum, product) => sum + product.price, 0);
+    setTotal(updatedTotal);
   };
 
   return (
@@ -30,8 +59,42 @@ const Cart = () => {
         <div>
           <ul className="list-group mb-4">
             {cart.map((item, index) => (
-              <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                {item.name} - {item.price} PLN
+              <li key={index} className="list-group-item d-flex  align-items-center">
+                <span className="w-20">
+                  {item.name} - {item.price} PLN
+                </span>
+
+                {/* ################################################################## */}
+                <div className="d-flex align-items-center w-50 gap-2 justify-content-between">
+                  {/* Przycisk do zmniejszenia ilości */}
+                  <button
+                    className="btn btn-sm btn-secondary"
+                    onClick={() => updateQuantity(index, item.quantity - 1)}
+                  >
+                    -
+                  </button>
+                  {/* Wyświetlanie ilości */}
+                  <span>{item.quantity}</span>
+
+                  {/* Przycisk do zwiększenia ilości */}
+                  <button
+                    className="btn btn-sm btn-secondary"
+                    onClick={() => updateQuantity(index, item.quantity + 1)}
+                  >
+                    +
+                  </button>
+
+
+                <button
+                  className="btn btn-sm btn-danger"
+                  style={{ width: '20%' }}
+                  onClick={() => removeItem(index)}
+                >
+                  Usuń
+                </button>
+
+                </div>
+
               </li>
             ))}
           </ul>
@@ -39,6 +102,7 @@ const Cart = () => {
           <div className="d-flex justify-content-center gap-3">
             <button className="btn btn-danger" onClick={clearCart}>Wyczyść koszyk</button>
             <button className="btn btn-secondary" onClick={() => navigate(-1)}>Cofnij</button>
+            <button className="btn btn-success" onClick={"#"}>Kup teraz</button>
           </div>
         </div>
       ) : (

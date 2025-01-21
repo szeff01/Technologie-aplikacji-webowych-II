@@ -147,7 +147,7 @@ app.get('/user-profile', async (req, res) => {
 // Endpoint aktualizacji produktu
 app.put('/update-product/:id', async (req, res) => {
     try {
-        const { id } = req.params; // Pobierz ID produktu z parametrów URL
+        const { id } = req.params;
         const { name, price, description, category, quantity } = req.body;
 
         // Walidacja wejścia
@@ -159,7 +159,7 @@ app.put('/update-product/:id', async (req, res) => {
         const updatedProduct = await Product.findByIdAndUpdate(
             id,
             { name, price, description, category, quantity },
-            { new: true } // Zwróć zaktualizowany produkt
+            { new: true } // Zwraca zaktualizowany dokument
         );
 
         if (!updatedProduct) {
@@ -172,6 +172,7 @@ app.put('/update-product/:id', async (req, res) => {
         res.status(500).json({ message: "Wewnętrzny błąd serwera." });
     }
 });
+
 
 
 // Endpoint usuwania produktu
@@ -187,22 +188,33 @@ app.delete('/delete-product/:id', async (req, res) => {
 });
 
 
-// Endpoint aktualizacji produktu
-app.put('/update-product/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { name, price, description, category, quantity } = req.body;
 
-        const updatedProduct = await Product.findByIdAndUpdate(
-            id,
-            { name, price, description, category, quantity },
-            { new: true }
+
+// Endpoint aktualizacji profilu użytkownika
+app.put('/update-profile', async (req, res) => {
+    try {
+        const { email, name, phone } = req.body;
+
+        // Sprawdzenie wymaganych pól
+        if (!email || !name || !phone) {
+            return res.status(400).json({ message: "Wszystkie pola są wymagane." });
+        }
+
+        // Znalezienie i aktualizacja użytkownika
+        const updatedUser = await FormDataModel.findOneAndUpdate(
+            { email }, // Znajdź użytkownika po emailu
+            { name, phone }, // Zaktualizuj te pola
+            { new: true } // Zwróć zaktualizowany dokument
         );
 
-        res.status(200).json({ message: "Produkt zaktualizowany!", product: updatedProduct });
+        if (!updatedUser) {
+            return res.status(404).json({ message: "Użytkownik nie został znaleziony." });
+        }
+
+        res.status(200).json({ message: "Profil zaktualizowany pomyślnie!", user: updatedUser });
     } catch (err) {
-        console.error("Błąd aktualizacji produktu:", err);
-        res.status(500).json({ message: "Wewnętrzny błąd serwera." });
+        console.error("Błąd aktualizacji profilu:", err);
+        res.status(500).json({ message: "Błąd serwera podczas aktualizacji profilu." });
     }
 });
 

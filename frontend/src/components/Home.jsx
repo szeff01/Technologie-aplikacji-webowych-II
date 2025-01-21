@@ -34,11 +34,22 @@ const Home = () => {
   };
 
   const addToCart = (product) => {
-    const updatedCart = [...cart, product];
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(item => item._id === product._id);
+  
+    if (existingProductIndex !== -1) {
+      // Jeśli produkt już istnieje w koszyku, zaktualizuj ilość
+      updatedCart[existingProductIndex].quantity += 1;
+    } else {
+      // Jeśli produkt nie istnieje w koszyku, dodaj go z ilością 1
+      updatedCart.push({ ...product, quantity: 1 });
+    }
+  
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
     alert(`${product.name} został dodany do koszyka!`);
   };
+  
 
   return (
     <div className="home-container">
