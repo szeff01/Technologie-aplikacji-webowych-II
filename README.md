@@ -2,7 +2,7 @@
 
 ## Temat projektu
 
-System zarządzania rezerwacjami dla korepetycji.
+Sklep internetowy
 
 # Instrukcja Uruchomienia projektu
 
