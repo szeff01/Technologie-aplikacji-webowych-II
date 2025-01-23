@@ -1,11 +1,37 @@
-# Uruchom backend
+# Techniologie aplikacji webowych II
 
-cd backend
-npm install
-npm start
+## Temat projektu
 
-# Uruchom frontend
+System zarządzania rezerwacjami dla korepetycji.
 
-cd frontend
-npm install
-npm run dev
+# Instrukcja Uruchomienia projektu
+
+## Uruchomienie backendu
+
+1. Przejdź do folderu backend:
+   ```bash
+   cd backend
+   ```
+2. Zainstaluj zależności:
+   ```bash
+   npm install
+   ```
+3. Uruchom server backendu:
+   ```bash
+   npm start
+   ```
+
+## Uruchomienie frontendu
+
+1. Przejdź do folderu frontend:
+   ```bash
+   cd frontend
+   ```
+2. Zainstaluj zależności:
+   ```bash
+   npm install
+   ```
+3. Uruchom frontend:
+   ```bash
+   npm run dev
+   ```
